@@ -1,0 +1,365 @@
+#!/software/opt/focal/x86_64/flair/2.3-0b/flair
+# FLUKA Project file
+Version: 2
+Title: Lab-Course: Radioactive decay of a Sr-90 source in a water phantom
+Input: praktikum.inp
+Exec: myexe
+Submit: *Default
+Tabs: 0.1 0.32 0.56 0.81 1.0
+Page: Plot
+DefMain: True
+LinkPrg: lfluka
+F77bound: True
+F77dline: False
+
+# Run information
+Run: <default>
+	Exe:      LeIllich.out
+	Prev:     0
+	Last:     1
+	Status:   3
+	Pid:      0
+	StartRun: 1718880821
+
+	# USRxxx data file: praktikum_21.bnn
+	Data: \I_\U.\e
+		Unit: 21
+		Type: b
+		Rule: +,\I\d\d\d_fort\.\U
+		Rule: +,\I\d\d\d_ftn\.\U
+	End
+
+	# USRxxx data file: praktikum_22.bnn
+	Data: \I_\U.\e
+		Unit: 22
+		Type: b
+		Rule: +,\I\d\d\d_fort\.\U
+		Rule: +,\I\d\d\d_ftn\.\U
+	End
+End
+
+# Material
+Material: Plexigla
+	alpha: 0
+	color: #503070
+	fuzz: 0.0
+	ior: 1.0
+	shine: 10.0
+	specular: 0.0
+End
+
+# Material
+Material: Brass
+	alpha: 0
+	color: #10D050
+	fuzz: 0.0
+	ior: 1.0
+	shine: 10.0
+	specular: 0.0
+End
+
+# Material
+Material: ZINC
+	alpha: 0
+	color: #1070B0
+	fuzz: 0.0
+	ior: 1.0
+	shine: 10.0
+	specular: 0.0
+End
+
+# Geometry Information
+Geometry:
+	Frame.bsplit: 0.5
+	Frame.tsplit: 0.5
+	Frame.vsplit: 0.5
+End
+
+# Geometry plot "GeoViewer Red plot"
+Plot: Red
+	Format: .eps
+	Type:   Geometry
+	basisu: 1 0 0
+	basisv: 0 1 0
+	boundaries: 1
+	cbcolors: 0
+	cblog: False
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 0
+	coord: X-Y
+	cpd: 0
+	extends: 19.3807 13.2971
+	grid: 0
+	index: 0
+	labels: 1
+	layer: Media
+	origin: -6.46049 -4.11095 0
+	subtype: Material
+	title: GeoViewer Red plot
+	x2log: False
+	x2tics: 0
+	xlog: False
+	y2log: False
+	y2tics: 0
+	ylog: False
+	zlog: False
+	ztics: 0
+End
+
+# Geometry plot "GeoViewer Red plot"
+Plot: Geometry
+	Format: .eps
+	Type:   Geometry
+	basisu: 1 0 0
+	basisv: 0 1 0
+	boundaries: 1
+	cbcolors: 0
+	cblog: False
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 0
+	coord: X-Y
+	cpd: 0
+	extends: 20 20
+	grid: 0
+	index: 0
+	labels: 1
+	layer: Media
+	origin: 12 0 0
+	subtype: Geometry
+	title: GeoViewer Red plot
+	x2log: False
+	x2tics: 0
+	xlog: False
+	y2log: False
+	y2tics: 0
+	ylog: False
+	zlog: False
+	ztics: 0
+End
+
+# Geometry plot "GeoViewer Green plot"
+Plot: Green
+	Format: .eps
+	Type:   Geometry
+	basisu: 0 0 1
+	basisv: 1 0 0
+	boundaries: 1
+	coord: Z-X
+	extends: 23.2568 15.9565
+	labels: 1
+	layer: Media
+	origin: 6.61826 0 1.89815
+	subtype: Material
+	title: GeoViewer Green plot
+End
+
+# Geometry plot "GeoViewer Blue plot"
+Plot: Blue
+	Format: .eps
+	Type:   Geometry
+	basisu: 0 0 1
+	basisv: 0 1 0
+	boundaries: 1
+	coord: Z-Y
+	extends: 4.50732 3.08573
+	labels: 1
+	layer: Media
+	origin: -0.02 0.01 0
+	subtype: Material
+	title: GeoViewer Blue plot
+End
+
+# Geometry plot "GeoViewer Magenta plot"
+Plot: Magenta
+	Format: .eps
+	Type:   Geometry
+	basisu: -1 0 0
+	basisv: 0 1 0
+	boundaries: 1
+	coord: X-Y
+	extends: 100 68.4604
+	labels: 1
+	layer: Media
+	origin: 0 0 0
+	subtype: Material
+	title: GeoViewer Magenta plot
+End
+
+# USRBIN plot "Dose 2D"
+Plot: Dose2D
+	Format: .eps
+	Type:   USRBIN
+	axes: Auto
+	bzmax: 2.495455
+	bzmin: -2.5
+	cbcolors: 30
+	cblog: True
+	cbmax: 1e-2
+	cbmin: 1e-10
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 1
+	cpd: 0
+	datafile: praktikum_22.bnn
+	det: 1
+	errors: 0
+	geo: Geometry
+	grid: 0
+	hist: 2D Projection
+	index: 0
+	int: 1.6689113621212192E-004
+	lw.0: 0
+	max: 8.22082628E-03
+	min: 3.33433212E-11
+	proj: Z
+	ps.0: 0
+	pt.0: 0
+	swap: 0
+	title: Dose 2D
+	with.0: errorbars
+	x2log: False
+	x2tics: 0
+	xlog: False
+	xrebin: 1
+	y2log: False
+	y2tics: 0
+	ylog: False
+	yrebin: 1
+	zlog: False
+	zrebin: 1
+	ztics: 0
+End
+
+# USRBIN plot "Dose profile Z"
+Plot: Dose1D_Z
+	Format: .eps
+	Type:   USRBIN
+	axes: Auto
+	bxmin: -2.
+	bymax: 2.495455
+	bymin: -2.5
+	bzmax: 2.495455
+	bzmin: -2.5
+	cbcolors: 30
+	cblog: False
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 1
+	cpd: 0
+	datafile: praktikum_22.bnn
+	det: 1
+	errors: 0
+	geo: Geometry
+	grid: 0
+	hist: 1D Projection
+	index: 1
+	int: 1.6689113621212468E-004
+	lw.0: 0
+	max: 1.30627025E-03
+	min: 3.75745088E-08
+	proj: X
+	ps.0: 0
+	pt.0: 0
+	swap: 0
+	title: Dose profile Z
+	with.0: histogram
+	x2log: False
+	x2tics: 0
+	xlog: False
+	xrebin: 1
+	y2log: False
+	y2tics: 0
+	ylog: False
+	yrebin: 1
+	zlog: False
+	zrebin: 1
+	ztics: 0
+End
+
+# USRBIN plot "Dose profile X"
+Plot: Dose1D_X
+	Format: .eps
+	Type:   USRBIN
+	axes: Auto
+	bxmax: -0.0004500043
+	bxmin: -0.004
+	cbcolors: 30
+	cblog: False
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 1
+	cpd: 0
+	datafile: praktikum_22.bnn
+	det: 1
+	errors: 0
+	geo: Geometry
+	grid: 0
+	hist: 1D Projection
+	index: 2
+	int: 1.1855391421319436E-006
+	lw.0: 0
+	max: 8.92167503E-04
+	min: 3.73017350E-08
+	proj: Y
+	ps.0: 0
+	pt.0: 0
+	swap: 0
+	title: Dose profile X
+	with.0: lines
+	x2log: False
+	x2tics: 0
+	xlog: False
+	xrebin: 1
+	y2log: False
+	y2tics: 0
+	ylog: False
+	yrebin: 1
+	zlog: False
+	zrebin: 1
+	ztics: 0
+End
+
+# USRBIN plot "Dose profile Y"
+Plot: Dose1D_Y
+	Format: .eps
+	Type:   USRBIN
+	axes: Auto
+	bxmax: 0.0006999956
+	bxmin: -0.0013
+	cbcolors: 30
+	cblog: False
+	cbpalette: FLUKA
+	cbround: 0
+	cbtics: 1
+	cpd: 0
+	datafile: praktikum_22.bnn
+	det: 1
+	errors: 0
+	geo: Geometry
+	grid: 0
+	hist: 1D Projection
+	index: 3
+	int: 1.2677917687494084E-005
+	lw.0: 0
+	max: 4.76674736E-03
+	min: 8.32383691E-08
+	proj: Z
+	ps.0: 0
+	pt.0: 0
+	swap: 0
+	title: Dose profile Y
+	with.0: lines
+	x2log: False
+	x2tics: 0
+	xlog: False
+	xrebin: 1
+	y2log: False
+	y2tics: 0
+	ylog: False
+	yrebin: 1
+	zlog: False
+	zrebin: 1
+	ztics: 0
+End
