@@ -1,0 +1,16 @@
+Dir: /project/prakt-dosimetry/Work/Groups/Morelli_Tekasala/simulation
+Cmd: /usr/bin/nohup /software/opt/focal/x86_64/fluka/2023.3.2/flutil/rfluka -e /project/prakt-dosimetry/Work/Groups/Morelli_Tekasala/simulation/myexe -M 1 praktikum
+/usr/bin/nohup: ignoring input
+$TARGET_MACHINE = Linux
+$FLUPRO = /software/opt/focal/x86_64/fluka/2023.3.2
+
+Initial seed already existing
+Running fluka in /project/prakt-dosimetry/Work/Groups/Morelli_Tekasala/simulation/fluka_308233
+================================ Running FLUKA for cycle # 1 =============================================
+Removing links
+Removing temporary files
+Saving output and random number seed
+Saving additional files generated     Moving fort.21 to /project/prakt-dosimetry/Work/Groups/Morelli_Tekasala/simulation/praktikum001_fort.21
+     Moving fort.22 to /project/prakt-dosimetry/Work/Groups/Morelli_Tekasala/simulation/praktikum001_fort.22
+
+End of FLUKA run
