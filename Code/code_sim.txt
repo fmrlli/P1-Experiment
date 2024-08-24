@@ -1,0 +1,128 @@
+ using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+using System;
+using UnityEngine.UI;
+
+public class ListReader : MonoBehaviour
+{
+    public RawImage rawImage; // Reference to the RawImage where the data will be plotted
+    public GameObject pixelPrefab; // The GameObject to be used as a pixel for plotting
+    public RectTransform canvasTransform; // The RectTransform of the Canvas containing the RawImage
+
+    public double maxValShow;
+   
+    // Lists to hold the data from each column
+    List<List<List<double>>> valueArrayField = new List<List<List<double>>>();
+
+    public void Start()
+    {
+        List<double> allVals = new List<double>();
+
+        string filePath = "/Users/jonathantekasala/Desktop/Praktikum2Data/Data22.txt";
+        
+        try
+        {
+            string path = Path.Combine(Application.streamingAssetsPath, filePath);
+
+            if (File.Exists(path))
+            {
+                using (StreamReader reader = new StreamReader(path))
+                {
+                    string line;
+
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string[] values = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+
+                        for (int i = 0; i < values.Length; i++)
+                        {
+                            allVals.Add(double.Parse(values[i], System.Globalization.NumberStyles.Float));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError("File not found: " + path);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("Error reading data file: " + ex.Message);
+        }
+
+        Debug.Log("Done with " + allVals.Count);
+
+        int cnt = 0;
+        for (int a = 0; a < 110; a++)
+        {
+            valueArrayField.Add(new List<List<double>>());
+            for (int b = 0; b < 110; b++)
+            {
+                valueArrayField[a].Add(new List<double>());
+                for (int c = 0; c < 1000; c++)
+                {
+                    valueArrayField[a][b].Add(allVals[cnt]);
+                    cnt++;
+                }
+            }
+        }
+
+        Debug.Log("Done with " + valueArrayField.Count + " & " + valueArrayField[0].Count + " & " + valueArrayField[0][0].Count);
+
+        PlotData();
+    }
+
+    public void PlotData()
+    {
+        int xPos = 110 / 2;
+        int zPos = 219;
+        // int yPos = 110 / 2;
+
+        List<double> vals = new List<double>();
+
+        for (int i = 0; i < 110; i++)
+        {
+            vals.Add(valueArrayField[xPos][i][zPos]);
+        }
+
+        RectTransform rawImageRect = rawImage.GetComponent<RectTransform>();
+        float imageWidth = rawImageRect.rect.width;
+        float imageHeight = rawImageRect.rect.height;
+
+        // Find the min and max values for both x and y
+        double minVal = double.MaxValue;
+        double maxVal = double.MinValue;
+
+        for (int i = 0; i < vals.Count; i++)
+        {
+            if (vals[i] < minVal)
+            {
+                minVal = vals[i];
+            }
+
+            if (vals[i] > maxVal)
+            {
+                maxVal = vals[i];
+            }   
+        }
+
+        maxValShow = maxVal;
+
+        for (int i = 0; i < vals.Count; i++)
+        {
+            double percCol = (vals[i] - minVal) / (maxVal - minVal);
+
+            float xCoord = (float)(i / (float)vals.Count * imageWidth);
+            float yCoord = (float)(percCol * imageHeight);
+
+            GameObject pixel = Instantiate(pixelPrefab, rawImage.transform);
+
+            RectTransform pixelRect = pixel.GetComponent<RectTransform>();
+            pixelRect.anchoredPosition = new Vector2(xCoord, yCoord);
+            
+        }
+    }
+}
